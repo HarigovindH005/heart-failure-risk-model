@@ -1,52 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Heart Failure Risk Predictor</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f6ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        input {
-            margin-bottom: 10px;
-            padding: 6px;
-            width: 300px;
+
+        .container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            width: 500px;
         }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            display: grid;
+            gap: 15px;
+        }
+
         label {
-            display: block;
-            margin-top: 10px;
+            font-weight: 500;
         }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+
         .submit-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            padding: 12px;
+            font-size: 1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
         }
+
+        .submit-btn:hover {
+            background: #2980b9;
+        }
+
         .result {
-            margin-top: 30px;
+            margin-top: 20px;
+            text-align: center;
             font-size: 1.2em;
-            color: darkred;
+            font-weight: bold;
+        }
+
+        .result.positive {
+            color: #e74c3c;
+        }
+
+        .result.negative {
+            color: #27ae60;
         }
     </style>
 </head>
 <body>
-    <h2>Heart Failure Risk Prediction</h2>
-    <form action="/predict" method="POST">
-        <label>Age: <input type="number" name="age" step="any" required></label>
-        <label>Anaemia (0 or 1): <input type="number" name="anaemia" step="1" required></label>
-        <label>Creatinine Phosphokinase: <input type="number" name="creatinine_phosphokinase" step="any" required></label>
-        <label>Diabetes (0 or 1): <input type="number" name="diabetes" step="1" required></label>
-        <label>Ejection Fraction: <input type="number" name="ejection_fraction" step="any" required></label>
-        <label>High Blood Pressure (0 or 1): <input type="number" name="high_blood_pressure" step="1" required></label>
-        <label>Platelets: <input type="number" name="platelets" step="any" required></label>
-        <label>Serum Creatinine: <input type="number" name="serum_creatinine" step="any" required></label>
-        <label>Serum Sodium: <input type="number" name="serum_sodium" step="any" required></label>
-        <label>Sex (0 = Female, 1 = Male): <input type="number" name="sex" step="1" required></label>
-        <label>Smoking (0 or 1): <input type="number" name="smoking" step="1" required></label>
-        <label>Time (follow-up days): <input type="number" name="time" required></label>
-        <input type="submit" value="Predict" class="submit-btn">
-    </form>
+    <div class="container">
+        <h2>Heart Failure Risk Prediction</h2>
+        <form action="/predict" method="POST">
+            <label>Age: <input type="number" name="age" step="any" required></label>
+            <label>Anaemia (0 or 1): <input type="number" name="anaemia" step="1" required></label>
+            <label>Creatinine Phosphokinase: <input type="number" name="creatinine_phosphokinase" step="any" required></label>
+            <label>Diabetes (0 or 1): <input type="number" name="diabetes" step="1" required></label>
+            <label>Ejection Fraction: <input type="number" name="ejection_fraction" step="any" required></label>
+            <label>High Blood Pressure (0 or 1): <input type="number" name="high_blood_pressure" step="1" required></label>
+            <label>Platelets: <input type="number" name="platelets" step="any" required></label>
+            <label>Serum Creatinine: <input type="number" name="serum_creatinine" step="any" required></label>
+            <label>Serum Sodium: <input type="number" name="serum_sodium" step="any" required></label>
+            <label>Sex (0 = Female, 1 = Male): <input type="number" name="sex" step="1" required></label>
+            <label>Smoking (0 or 1): <input type="number" name="smoking" step="1" required></label>
+            <label>Time (follow-up days): <input type="number" name="time" required></label>
+            <input type="submit" value="Predict Risk" class="submit-btn">
+        </form>
 
-    {% if prediction_text %}
-        <div class="result">{{ prediction_text }}</div>
-    {% endif %}
+        {% if prediction_text %}
+            <div class="result {% if 'High' in prediction_text %}positive{% else %}negative{% endif %}">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
