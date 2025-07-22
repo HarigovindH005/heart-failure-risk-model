@@ -71,8 +71,8 @@ The user interface is built with **Flask** and styled using **Bootstrap 5**. It 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/heart-failure-predictor.git
-cd heart-failure-predictor
+git clone https://github.com/HarigovindH005/heart-failure-risk-model
+cd heart-failure-risk-model
 ```
 ### 2. Install Dependencies
 
