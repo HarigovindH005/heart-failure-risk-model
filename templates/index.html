@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Failure Risk Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 6px;
+            width: 300px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        .submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h2>Heart Failure Risk Prediction</h2>
+    <form action="/predict" method="POST">
+        <label>Age: <input type="number" name="age" step="any" required></label>
+        <label>Anaemia (0 or 1): <input type="number" name="anaemia" step="1" required></label>
+        <label>Creatinine Phosphokinase: <input type="number" name="creatinine_phosphokinase" step="any" required></label>
+        <label>Diabetes (0 or 1): <input type="number" name="diabetes" step="1" required></label>
+        <label>Ejection Fraction: <input type="number" name="ejection_fraction" step="any" required></label>
+        <label>High Blood Pressure (0 or 1): <input type="number" name="high_blood_pressure" step="1" required></label>
+        <label>Platelets: <input type="number" name="platelets" step="any" required></label>
+        <label>Serum Creatinine: <input type="number" name="serum_creatinine" step="any" required></label>
+        <label>Serum Sodium: <input type="number" name="serum_sodium" step="any" required></label>
+        <label>Sex (0 = Female, 1 = Male): <input type="number" name="sex" step="1" required></label>
+        <label>Smoking (0 or 1): <input type="number" name="smoking" step="1" required></label>
+        <label>Time (follow-up days): <input type="number" name="time" required></label>
+        <input type="submit" value="Predict" class="submit-btn">
+    </form>
+
+    {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+</body>
+</html>
